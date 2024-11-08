@@ -6,6 +6,7 @@ namespace MysticalForestAdventure
 {
     public enum Symbol
     {
+        NONE = -1,
         LOW1, LOW2, LOW3, LOW4, LOW5,
         HIGH1, HIGH2, HIGH3, HIGH4,
         WILD,
@@ -28,11 +29,5 @@ namespace MysticalForestAdventure
 		[Tooltip("Index should be within 0 to rows * cols - 1")]
 		[SerializeField] private int[] _positionIndices;
         public int[] PositionIndices => _positionIndices;
-
-        public void SetPositionIndices(int[] positionIndices)
-        {
-			_positionIndices = positionIndices;
-
-		}
 	}
 }
