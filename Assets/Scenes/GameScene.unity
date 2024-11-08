@@ -941,6 +941,12 @@ MonoBehaviour:
     _betIncrement: 0.1
   _currentBetAmount: 0
   _userProfileManager: {fileID: 1080126561}
+  _reelController: {fileID: 0}
+  _scoreManager: {fileID: 0}
+  _winResult:
+    Symbol: 0
+    MaxLength: 0
+    PayLineIndex: 0
 --- !u!4 &1165556431
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,6 +1037,132 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207971662}
   m_CullTransparentMesh: 1
+--- !u!1 &1520997103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1520997105}
+  - component: {fileID: 1520997104}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1520997104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520997103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c721c08e991d4384397e010e553b3de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scorePoints:
+  - Symbol: 0
+    ConsequtiveCount: 3
+    Multiplier: 0.3
+  - Symbol: 0
+    ConsequtiveCount: 4
+    Multiplier: 1.2
+  - Symbol: 0
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 1
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 1
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 1
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 2
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 2
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 2
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 3
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 3
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 3
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 4
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 4
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 4
+    ConsequtiveCount: 5
+    Multiplier: 3
+  - Symbol: 8
+    ConsequtiveCount: 3
+    Multiplier: 0.4
+  - Symbol: 8
+    ConsequtiveCount: 4
+    Multiplier: 2
+  - Symbol: 8
+    ConsequtiveCount: 5
+    Multiplier: 8
+  - Symbol: 7
+    ConsequtiveCount: 3
+    Multiplier: 0.6
+  - Symbol: 7
+    ConsequtiveCount: 4
+    Multiplier: 4
+  - Symbol: 7
+    ConsequtiveCount: 5
+    Multiplier: 12
+  - Symbol: 6
+    ConsequtiveCount: 3
+    Multiplier: 0.8
+  - Symbol: 6
+    ConsequtiveCount: 4
+    Multiplier: 6
+  - Symbol: 6
+    ConsequtiveCount: 5
+    Multiplier: 16
+  - Symbol: 6
+    ConsequtiveCount: 5
+    Multiplier: 16
+  - Symbol: 6
+    ConsequtiveCount: 5
+    Multiplier: 16
+  - Symbol: 5
+    ConsequtiveCount: 5
+    Multiplier: 20
+--- !u!4 &1520997105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520997103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1567022702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,5 +2035,6 @@ SceneRoots:
   - {fileID: 1080126562}
   - {fileID: 1916368185}
   - {fileID: 1656291272}
+  - {fileID: 1520997105}
   - {fileID: 1697785808}
   - {fileID: 1165172594}

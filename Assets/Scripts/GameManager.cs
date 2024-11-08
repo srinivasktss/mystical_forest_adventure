@@ -10,6 +10,9 @@ namespace MysticalForestAdventure
 		[SerializeField] private double _currentBetAmount;
 		[SerializeField] private UserProfileManager _userProfileManager;
 		[SerializeField] private ReelController _reelController;
+		[SerializeField] private ScoreManager _scoreManager;
+
+		[SerializeField] private WinResult _winResult;
 
 		private void Awake()
 		{
@@ -26,6 +29,7 @@ namespace MysticalForestAdventure
 
 		private void Start()
 		{
+			_winResult = new WinResult();
 			_currentBetAmount = _betData.MinBetAmount;
 		}
 
@@ -64,6 +68,22 @@ namespace MysticalForestAdventure
 			}
 
 			_reelController.FillReel();
+			_reelController.CheckMatchingPayLines(ref _winResult);
+
+			CheckResult();
+		}
+
+		public void CheckResult()
+		{
+			if(_winResult == null)
+			{
+				Debug.Log($"No result available");
+				return;
+			}
+
+			double multiplier = _scoreManager.GetMultiplier(_winResult.Symbol, (ConsequitiveCount)_winResult.MaxLength);
+
+			_userProfileManager.UpdateAmount(_userProfileManager.GetAmount() * multiplier);
 		}
 	}
 }

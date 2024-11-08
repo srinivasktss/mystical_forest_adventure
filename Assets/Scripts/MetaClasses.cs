@@ -55,4 +55,27 @@ namespace MysticalForestAdventure
         [SerializeField] private double _betIncrement;
         public double BetIncrement => _betIncrement;
     }
+
+    [Serializable]
+    public class WinResult
+    {
+        public Symbol Symbol;
+        public int MaxLength;
+        public int PayLineIndex;
+    }
+
+    public enum ConsequitiveCount
+    {
+        Three = 3,
+        Four = 4,
+        Five = 5
+    }
+
+    [Serializable]
+    public class ScorePoint
+    {
+        public Symbol Symbol;
+        public ConsequitiveCount ConsequtiveCount;
+        public double Multiplier;
+    }
 }

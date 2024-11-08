@@ -15,19 +15,6 @@ namespace MysticalForestAdventure
 			InitializeCurrentReel();
 		}
 
-		private void Update()
-		{
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                FillReel();
-            }
-
-			if(Input.GetKeyDown(KeyCode.C))
-			{
-				CheckMatchingPayLines();
-			}
-        }
-
 		private SymbolData GetReelSymbolData(int index)
 		{
 			if (index < 0 || index >= _reelData.TotalSlots)
@@ -70,7 +57,7 @@ namespace MysticalForestAdventure
 			UpdateReelUI();
 		}
 
-		private void CheckMatchingPayLines()
+		public void CheckMatchingPayLines(ref WinResult winResult)
 		{
 			Symbol maxMatchSymbol = Symbol.NONE;
 			int maxLength = 0;
@@ -111,7 +98,11 @@ namespace MysticalForestAdventure
 				}
             }
 
-            Debug.Log($"maxMatchSymbol: {maxMatchSymbol}, maxLength: {maxLength}, maxPayLineIndex: {maxPayLineIndex}");
+			Debug.Log($"maxMatchSymbol: {maxMatchSymbol}, maxLength: {maxLength}, maxPayLineIndex: {maxPayLineIndex}");
+
+			winResult.MaxLength = maxLength;
+			winResult.Symbol = maxMatchSymbol;
+			winResult.PayLineIndex = maxPayLineIndex;
 		}
 	}
 }
