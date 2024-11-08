@@ -67,6 +67,8 @@ namespace MysticalForestAdventure
 				return;
 			}
 
+			_userProfileManager.UpdateAmount(-_currentBetAmount);
+
 			_reelController.FillReel();
 			_reelController.CheckMatchingPayLines(ref _winResult);
 
@@ -83,7 +85,7 @@ namespace MysticalForestAdventure
 
 			double multiplier = _scoreManager.GetMultiplier(_winResult.Symbol, (ConsequitiveCount)_winResult.MaxLength);
 
-			_userProfileManager.UpdateAmount(_userProfileManager.GetAmount() * multiplier);
+			_userProfileManager.UpdateAmount(_currentBetAmount * multiplier);
 		}
 	}
 }

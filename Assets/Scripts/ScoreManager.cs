@@ -39,9 +39,15 @@ namespace MysticalForestAdventure
 		{
 			double multiplier = 0;
 
-			_scorePointsMap.TryGetValue(symbol, out var conseq);
+			if(_scorePointsMap.TryGetValue(symbol, out var conseq))
+			{
+				Debug.Log($"Score for {symbol} found");
+			}
 
-			conseq?.TryGetValue(consequitiveCount, out multiplier);
+			if(conseq != null && conseq.TryGetValue(consequitiveCount, out multiplier))
+			{
+				Debug.Log($"Multiplier for {consequitiveCount} found: {multiplier}");
+			}
 
 			return multiplier;
 		}
