@@ -16,7 +16,10 @@ namespace MysticalForestAdventure
         [SerializeField] private int _reelCols;
         public int ReelCols => _reelCols;
 
-        [SerializeField] private SymbolData[] _symbolData;
+		[SerializeField] private int _totalSlots;
+		public int TotalSlots => _totalSlots;
+
+		[SerializeField] private SymbolData[] _symbolData;
         public SymbolData[] SymbolData => _symbolData;
 
 		[SerializeField] private PayLine[] _payLines;
@@ -26,6 +29,7 @@ namespace MysticalForestAdventure
 
 		private void OnEnable()
 		{
+			_totalSlots = _reelRows * _reelCols;
 			InitializeSymbolDataMap();
 			ValidatePayLines();
 		}
