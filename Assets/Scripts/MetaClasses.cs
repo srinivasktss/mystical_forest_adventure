@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MysticalForestAdventure
@@ -10,4 +12,20 @@ namespace MysticalForestAdventure
         BONUS,
         SCATTER
     }
+
+    [Serializable]
+    public class SymbolData
+    {
+		[SerializeField] private Symbol _symbol;
+		public Symbol Symbol => _symbol;
+		[SerializeField] private Sprite _symbolSprite;
+		public Sprite SymbolSprite => _symbolSprite;
+	}
+
+	[Serializable]
+	public class PayLine
+	{
+		[SerializeField] private int[] _positionIndices;
+        public int[] PositionIndices => _positionIndices;
+	}
 }

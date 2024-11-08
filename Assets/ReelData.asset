@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694e8307bdbf08e4f988b07781f844b7, type: 3}
+  m_Name: ReelData
+  m_EditorClassIdentifier: 
+  _reelName: Reel1
+  _reelRows: 3
+  _reelCols: 5
+  _symbolData:
+  - _symbol: 0
+    _symbolSprite: {fileID: -3929290797719471440, guid: 30bbc51ea9f181c4fae67f8d1e6643c0, type: 3}
+  - _symbol: 1
+    _symbolSprite: {fileID: -6147029251019441016, guid: ae2d424f870220b4a9951ce00d5658c5, type: 3}
+  - _symbol: 2
+    _symbolSprite: {fileID: 492748053288140029, guid: 6a714fada1186b341a362ab845ff90aa, type: 3}
+  - _symbol: 3
+    _symbolSprite: {fileID: -6544380922820907374, guid: 4c522f41c1b035c40a776c3643f066d3, type: 3}
+  - _symbol: 4
+    _symbolSprite: {fileID: -4738272672269061699, guid: bd5a8d2788cc0164db5ebb209c684af5, type: 3}
+  - _symbol: 5
+    _symbolSprite: {fileID: 1480621549004217951, guid: ca0a29c28dd0bc8408e3bec6c0493757, type: 3}
+  - _symbol: 6
+    _symbolSprite: {fileID: 5460124998386347165, guid: dd8161b245801224490b32205c381e2b, type: 3}
+  - _symbol: 7
+    _symbolSprite: {fileID: 5452342757432072790, guid: 5929bc206b3993246a38c471e5336825, type: 3}
+  - _symbol: 8
+    _symbolSprite: {fileID: 9053364927394142708, guid: e2895dea03e0cbf41aac237cbe24e8ab, type: 3}
+  - _symbol: 9
+    _symbolSprite: {fileID: -6671282886758728463, guid: 17e81dcda8deae04488adfc2e82ee3c5, type: 3}
+  - _symbol: 10
+    _symbolSprite: {fileID: 8285072922174892097, guid: b0202321b333ee84289a8bbbb8ae3a33, type: 3}
+  - _symbol: 11
+    _symbolSprite: {fileID: -175910663573133777, guid: 23d3a750184ee5d4e8cf6a7758e52925, type: 3}
+  _payLines:
+  - _positionIndices: 
