@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MysticalForestAdventure
 {
     [CreateAssetMenu(fileName = "ReelData", menuName = "Scriptable Objects/ReelData", order = 1)]
-    public class ReelDataScriptableObjectScript : ScriptableObject
+    public class ReelDataScriptableObject : ScriptableObject
     {
         [SerializeField] private string _reelName;
         public string ReelName => _reelName;
@@ -23,12 +24,13 @@ namespace MysticalForestAdventure
 
 		private Dictionary<Symbol, Sprite> _symbolDataMap;
 
-		private void Awake()
+		private void OnEnable()
 		{
-            SetUpSymbolDataMap();
+			InitializeSymbolDataMap();
+			ValidatePayLines();
 		}
 
-        private void SetUpSymbolDataMap()
+		private void InitializeSymbolDataMap()
         {
 			_symbolDataMap ??= new Dictionary<Symbol, Sprite>();
 
@@ -37,6 +39,22 @@ namespace MysticalForestAdventure
             foreach (SymbolData symbolData in _symbolData)
             {
 				_symbolDataMap.Add(symbolData.Symbol, symbolData.SymbolSprite);
+			}
+		}
+
+		private void ValidatePayLines()
+		{
+			int maxIndex = _reelRows * _reelCols - 1;
+
+			foreach (PayLine payLine in _payLines)
+			{
+				foreach (int index in payLine.PositionIndices)
+				{
+					if (index < 0 || index > maxIndex)
+					{
+						throw new Exception($"PayLine contains invalid index {index}. Valid range is 0 to {maxIndex}.");
+					}
+				}
 			}
 		}
 	}

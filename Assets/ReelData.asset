@@ -40,5 +40,4 @@ MonoBehaviour:
     _symbolSprite: {fileID: 8285072922174892097, guid: b0202321b333ee84289a8bbbb8ae3a33, type: 3}
   - _symbol: 11
     _symbolSprite: {fileID: -175910663573133777, guid: 23d3a750184ee5d4e8cf6a7758e52925, type: 3}
-  _payLines:
-  - _positionIndices: 
+  _payLines: []

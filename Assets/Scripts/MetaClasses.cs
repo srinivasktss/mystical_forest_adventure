@@ -25,7 +25,14 @@ namespace MysticalForestAdventure
 	[Serializable]
 	public class PayLine
 	{
+		[Tooltip("Index should be within 0 to rows * cols - 1")]
 		[SerializeField] private int[] _positionIndices;
         public int[] PositionIndices => _positionIndices;
+
+        public void SetPositionIndices(int[] positionIndices)
+        {
+			_positionIndices = positionIndices;
+
+		}
 	}
 }
