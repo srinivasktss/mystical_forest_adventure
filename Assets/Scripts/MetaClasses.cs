@@ -30,4 +30,19 @@ namespace MysticalForestAdventure
 		[SerializeField] private int[] _positionIndices;
         public int[] PositionIndices => _positionIndices;
 	}
+
+    [Serializable]
+	public class UserProfile
+    {
+        [SerializeField] private string _name;
+        [SerializeField] private double _amount;
+
+        public string Name => _name;
+
+        public double Amount => _amount;
+
+		public void SetName(string name) => _name = name;
+        public void SetAmount(double amount) => _amount = amount;
+
+	}
 }
