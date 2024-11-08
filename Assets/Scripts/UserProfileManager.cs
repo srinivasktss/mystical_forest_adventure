@@ -17,19 +17,19 @@ namespace MysticalForestAdventure
 		private void LoadUserProfile()
 		{
 			string name;
-			double amount;
+			float amount;
 			bool newUserCreated = false;
 			if (PlayerPrefs.HasKey(k_PlayerNameKey) && PlayerPrefs.HasKey(k_PlayerAmountKey))
 			{
 				name = PlayerPrefs.GetString(k_PlayerNameKey);
-				string amountString = PlayerPrefs.GetString(k_PlayerAmountKey);
-				amount = double.TryParse(amountString, out double result) ? result : 0;
+				amount = PlayerPrefs.GetFloat(k_PlayerAmountKey);
 			}
 			else
 			{
 				Debug.Log("No saved user profile data found. So, creating new profile data.");
 				name = $"USER_{Random.Range(1000, 10000)}";
 				amount = 100;
+
 				newUserCreated = true;
 			}
 
@@ -46,13 +46,13 @@ namespace MysticalForestAdventure
 		private void SaveUserProfile()
 		{
 			PlayerPrefs.SetString(k_PlayerNameKey, _userProfile.Name);
-			PlayerPrefs.SetString(k_PlayerAmountKey, _userProfile.Amount.ToString());
+			PlayerPrefs.SetFloat(k_PlayerAmountKey, _userProfile.Amount);
 			PlayerPrefs.Save();
 		}
 
-		public double GetAmount() => _userProfile.Amount;
+		public float GetAmount() => _userProfile.Amount;
 
-		public bool UpdateAmount(double amount)
+		public bool UpdateAmount(float amount)
 		{
 			if (amount < 0 && _userProfile.Amount + amount < 0)
 			{

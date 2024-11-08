@@ -35,25 +35,25 @@ namespace MysticalForestAdventure
 	public class UserProfile
     {
         [SerializeField] private string _name;
-        [SerializeField] private double _amount;
+        [SerializeField] private float _amount;
 
         public string Name => _name;
 
-        public double Amount => _amount;
+        public float Amount => _amount;
 
 		public void SetName(string name) => _name = name;
-        public void SetAmount(double amount) => _amount = amount;
+        public void SetAmount(float amount) => _amount = amount;
 	}
 
     [Serializable]
     public class BetData
     {
-        [SerializeField] private double _minBetAmount;
-        public double MinBetAmount => _minBetAmount;
-        [SerializeField] private double _maxBetAmount;
-        public double MaxBetAmount => _maxBetAmount;
-        [SerializeField] private double _betIncrement;
-        public double BetIncrement => _betIncrement;
+        [SerializeField] private float _minBetAmount;
+        public float MinBetAmount => _minBetAmount;
+        [SerializeField] private float _maxBetAmount;
+        public float MaxBetAmount => _maxBetAmount;
+        [SerializeField] private float _betIncrement;
+        public float BetIncrement => _betIncrement;
     }
 
     [Serializable]
@@ -76,6 +76,6 @@ namespace MysticalForestAdventure
     {
         public Symbol Symbol;
         public ConsequitiveCount ConsequtiveCount;
-        public double Multiplier;
+        public float Multiplier;
     }
 }

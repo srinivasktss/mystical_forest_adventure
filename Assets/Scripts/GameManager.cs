@@ -7,7 +7,7 @@ namespace MysticalForestAdventure
 		public static GameManager Instance { get; private set; }
 
 		[SerializeField] private BetData _betData;
-		[SerializeField] private double _currentBetAmount;
+		[SerializeField] private float _currentBetAmount;
 		[SerializeField] private UserProfileManager _userProfileManager;
 		[SerializeField] private ReelController _reelController;
 		[SerializeField] private ScoreManager _scoreManager;
@@ -83,7 +83,7 @@ namespace MysticalForestAdventure
 				return;
 			}
 
-			double multiplier = _scoreManager.GetMultiplier(_winResult.Symbol, (ConsequitiveCount)_winResult.MaxLength);
+			float multiplier = _scoreManager.GetMultiplier(_winResult.Symbol, (ConsequitiveCount)_winResult.MaxLength);
 
 			_userProfileManager.UpdateAmount(_currentBetAmount * multiplier);
 		}

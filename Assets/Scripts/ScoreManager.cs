@@ -7,7 +7,7 @@ namespace MysticalForestAdventure
     {
         [SerializeField] private List<ScorePoint> _scorePoints;
 
-        private Dictionary<Symbol, Dictionary<ConsequitiveCount, double>> _scorePointsMap;
+        private Dictionary<Symbol, Dictionary<ConsequitiveCount, float>> _scorePointsMap;
 
 		private void Awake()
 		{
@@ -16,14 +16,14 @@ namespace MysticalForestAdventure
 
 		private void InitializeScorePointsMap()
 		{
-			_scorePointsMap ??= new Dictionary<Symbol, Dictionary<ConsequitiveCount, double>>();
+			_scorePointsMap ??= new Dictionary<Symbol, Dictionary<ConsequitiveCount, float>>();
 			_scorePointsMap.Clear();
 
 			foreach (ScorePoint scorePoint in _scorePoints)
 			{
 				if(!_scorePointsMap.ContainsKey(scorePoint.Symbol))
 				{
-					_scorePointsMap.Add(scorePoint.Symbol, new Dictionary<ConsequitiveCount, double>());
+					_scorePointsMap.Add(scorePoint.Symbol, new Dictionary<ConsequitiveCount, float>());
 				}
 
 				if (!_scorePointsMap[scorePoint.Symbol].ContainsKey(scorePoint.ConsequtiveCount))
@@ -35,9 +35,9 @@ namespace MysticalForestAdventure
 			}
 		}
 
-		public double GetMultiplier(Symbol symbol, ConsequitiveCount consequitiveCount)
+		public float GetMultiplier(Symbol symbol, ConsequitiveCount consequitiveCount)
 		{
-			double multiplier = 0;
+			float multiplier = 0;
 
 			if(_scorePointsMap.TryGetValue(symbol, out var conseq))
 			{
