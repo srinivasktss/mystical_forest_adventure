@@ -50,6 +50,7 @@ namespace MysticalForestAdventure
 			PlayerPrefs.Save();
 		}
 
+		public double GetAmount() => _userProfile.Amount;
 
 		public bool UpdateAmount(double amount)
 		{

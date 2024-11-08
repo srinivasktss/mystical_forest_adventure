@@ -43,6 +43,16 @@ namespace MysticalForestAdventure
 
 		public void SetName(string name) => _name = name;
         public void SetAmount(double amount) => _amount = amount;
-
 	}
+
+    [Serializable]
+    public class BetData
+    {
+        [SerializeField] private double _minBetAmount;
+        public double MinBetAmount => _minBetAmount;
+        [SerializeField] private double _maxBetAmount;
+        public double MaxBetAmount => _maxBetAmount;
+        [SerializeField] private double _betIncrement;
+        public double BetIncrement => _betIncrement;
+    }
 }

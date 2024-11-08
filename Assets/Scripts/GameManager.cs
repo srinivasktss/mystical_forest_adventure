@@ -1,0 +1,69 @@
+using UnityEngine;
+
+namespace MysticalForestAdventure
+{
+    public class GameManager : MonoBehaviour
+    {
+		public static GameManager Instance { get; private set; }
+
+		[SerializeField] private BetData _betData;
+		[SerializeField] private double _currentBetAmount;
+		[SerializeField] private UserProfileManager _userProfileManager;
+		[SerializeField] private ReelController _reelController;
+
+		private void Awake()
+		{
+			if (Instance != null && Instance != this)
+			{
+				Destroy(gameObject);
+			}
+			else
+			{
+				Instance = this;
+				DontDestroyOnLoad(gameObject);
+			}
+		}
+
+		private void Start()
+		{
+			_currentBetAmount = _betData.MinBetAmount;
+		}
+
+		public void IncrmentBet()
+		{
+			if(_userProfileManager.GetAmount() < _currentBetAmount + _betData.BetIncrement)
+			{
+				Debug.Log($"Insufficient amount");
+				return;
+			}
+
+			_currentBetAmount += _betData.BetIncrement;
+			ClampBetAmount();
+		}
+
+		public void DecrementBet()
+		{
+			_currentBetAmount -= _betData.BetIncrement;
+			ClampBetAmount();
+		}
+
+		private void ClampBetAmount()
+		{
+			if (_currentBetAmount < _betData.MinBetAmount)
+				_currentBetAmount = _betData.MinBetAmount;
+			else if(_currentBetAmount > _betData.MaxBetAmount)
+				_currentBetAmount = _betData.MaxBetAmount;
+		}
+
+		public void CheckAndSpinReel()
+		{
+			if(_userProfileManager.GetAmount() < _currentBetAmount)
+			{
+				Debug.Log("Insufficient amount");
+				return;
+			}
+
+			_reelController.FillReel();
+		}
+	}
+}

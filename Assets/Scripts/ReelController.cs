@@ -64,7 +64,7 @@ namespace MysticalForestAdventure
             }
         }
 
-		private void FillReel()
+		public void FillReel()
 		{
 			GenerateCurrentReel();
 			UpdateReelUI();
