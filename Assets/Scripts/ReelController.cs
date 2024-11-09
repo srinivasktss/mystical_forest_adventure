@@ -13,6 +13,7 @@ namespace MysticalForestAdventure
 		private void Awake()
 		{
 			InitializeCurrentReel();
+			FillReel();
 		}
 
 		private SymbolData GetReelSymbolData(int index)
