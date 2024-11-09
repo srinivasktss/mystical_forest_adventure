@@ -78,4 +78,10 @@ namespace MysticalForestAdventure
         public ConsequitiveCount ConsequtiveCount;
         public float Multiplier;
     }
+
+    public static class Scenes
+    {
+        public const string k_loadingScene = "LoadingScene";
+        public const string k_gameScene = "GameScene";
+    }
 }
