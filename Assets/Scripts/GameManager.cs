@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace MysticalForestAdventure
 {
+	[DefaultExecutionOrder(100)]
     public class GameManager : MonoBehaviour
     {
 		public static GameManager Instance { get; private set; }
@@ -12,7 +14,10 @@ namespace MysticalForestAdventure
 		[SerializeField] private ReelController _reelController;
 		[SerializeField] private ScoreManager _scoreManager;
 
-		[SerializeField] private WinResult _winResult;
+		private WinResult _winResult;
+		public float CurrentBetAmount => _currentBetAmount;
+
+		public event Action<float> OnBetAmountUpdated, OnAmountUpdated;
 
 		private void Awake()
 		{
@@ -25,10 +30,7 @@ namespace MysticalForestAdventure
 				Instance = this;
 				DontDestroyOnLoad(gameObject);
 			}
-		}
 
-		private void Start()
-		{
 			_winResult = new WinResult();
 			_currentBetAmount = _betData.MinBetAmount;
 		}
@@ -57,6 +59,8 @@ namespace MysticalForestAdventure
 				_currentBetAmount = _betData.MinBetAmount;
 			else if(_currentBetAmount > _betData.MaxBetAmount)
 				_currentBetAmount = _betData.MaxBetAmount;
+
+			OnBetAmountUpdated?.Invoke(_currentBetAmount);
 		}
 
 		public void CheckAndSpinReel()
@@ -68,6 +72,8 @@ namespace MysticalForestAdventure
 			}
 
 			_userProfileManager.UpdateAmount(-_currentBetAmount);
+			
+			OnAmountUpdated?.Invoke(_userProfileManager.GetAmount());
 
 			_reelController.FillReel();
 			_reelController.CheckMatchingPayLines(ref _winResult);

@@ -1419,6 +1419,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &767060956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767060958}
+  - component: {fileID: 767060957}
+  m_Layer: 0
+  m_Name: InGameUserDataUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &767060957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767060956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d819fa9e185d3bc48b2736b3d4dbd43f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amountValueText: {fileID: 481029606}
+  _winValueText: {fileID: 973322459}
+  _betValueText: {fileID: 2052452029}
+--- !u!4 &767060958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767060956}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &772417127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2430,10 +2477,6 @@ MonoBehaviour:
   _userProfileManager: {fileID: 1080126561}
   _reelController: {fileID: 1656291271}
   _scoreManager: {fileID: 1520997104}
-  _winResult:
-    Symbol: 0
-    MaxLength: 0
-    PayLineIndex: 0
 --- !u!4 &1165556431
 Transform:
   m_ObjectHideFlags: 0
@@ -4517,5 +4560,6 @@ SceneRoots:
   - {fileID: 1916368185}
   - {fileID: 1656291272}
   - {fileID: 1520997105}
+  - {fileID: 767060958}
   - {fileID: 1697785808}
   - {fileID: 1165172594}
