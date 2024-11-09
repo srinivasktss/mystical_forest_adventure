@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +11,13 @@ namespace MysticalForestAdventure
 		[SerializeField] private SymbolData[] _currentReelSymbolData;
 		[SerializeField] private Image[] _symbolImages;
 
+		[SerializeField] private int _reelSpriteSpacing = 10;
+		[SerializeField] private RawImage[] _reelRawImageList;
+
 		private void Awake()
 		{
 			InitializeCurrentReel();
-			FillReel();
+			GenerateReel();
 		}
 
 		private SymbolData GetReelSymbolData(int index)
@@ -52,10 +56,37 @@ namespace MysticalForestAdventure
             }
         }
 
-		public void FillReel()
+		public void GenerateReel()
 		{
-			GenerateCurrentReel();
-			UpdateReelUI();
+			List<Sprite> symbolSprites = new List<Sprite>();
+			List<Sprite> randomSymbolsSprites = new List<Sprite>();
+			int randomIndex;
+
+			for(int i = 0; i < _reelData.ReelCols; i++)
+			{
+				foreach(var symbolData in _reelData.SymbolData)
+					symbolSprites.Add(symbolData.SymbolSprite);
+
+				randomSymbolsSprites.Clear();
+
+				while (symbolSprites.Count > 0)
+				{
+					randomIndex = UnityEngine.Random.Range(0, symbolSprites.Count);
+					randomSymbolsSprites.Add(symbolSprites[randomIndex]);
+
+					symbolSprites.RemoveAt(randomIndex);
+				}
+
+				_reelRawImageList[i].texture = SpriteCombiner.CombineSpritesVerticallyForTexture(randomSymbolsSprites, _reelSpriteSpacing);
+			}
+
+			/*GenerateCurrentReel();
+			UpdateReelUI();*/
+		}
+
+		public void SpinReel()
+		{
+
 		}
 
 		public void CheckMatchingPayLines(ref WinResult winResult)
