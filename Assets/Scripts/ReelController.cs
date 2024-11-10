@@ -9,43 +9,39 @@ namespace MysticalForestAdventure
 	public class ReelController : MonoBehaviour
     {
 		[SerializeField] private ReelDataScriptableObject _reelData;
-		[SerializeField] private SymbolData[] _currentReelSymbolData;
+		[SerializeField] private SymbolData[] _resultReelSymbolData;
 		[SerializeField] private Image[] _symbolImages;
 
 		[SerializeField] private int _reelSpriteSpacing = 10;
 		[SerializeField] private RawImage[] _reelRawImageList;
 
 		private List<SymbolData>[] _randomGeneratedFullReel;
-		[SerializeField] private int[] _currentReelBottomIndices;
+		[SerializeField] private int[] _resultReelBottomIndices;
 		[SerializeField] private Ease _spinFirstAnimatinEase = Ease.Linear;
 		[SerializeField] private Ease _spinLastAnimatinEase = Ease.OutElastic;
 
+		private int _totalSpinSequences;
+		private int _completedSpinSequences = 0;
+
 		private void Awake()
 		{
-			InitializeCurrentReel();
+			InitializeReelRelatedData();
 			GenerateReel();
 		}
 
-		private SymbolData GetReelSymbolData(int index)
+		private SymbolData GetResultReelSymbolData(int index)
 		{
 			if (index < 0 || index >= _reelData.TotalSlots)
 				throw new IndexOutOfRangeException();
 
-			return _currentReelSymbolData[index];
+			return _resultReelSymbolData[index];
 		}
 
-		private void InitializeCurrentReel()
+		private void InitializeReelRelatedData()
 		{
 			_randomGeneratedFullReel = new List<SymbolData>[_reelData.ReelCols];
-			_currentReelBottomIndices = new int[_reelData.ReelCols];
-			_currentReelSymbolData = new SymbolData[_reelData.TotalSlots];
-		}
-
-		private SymbolData GetRandomSymbolData()
-		{
-			int randomSymbolIndex = UnityEngine.Random.Range(0, _reelData.SymbolData.Length);
-
-			return _reelData.SymbolData[randomSymbolIndex];
+			_resultReelBottomIndices = new int[_reelData.ReelCols];
+			_resultReelSymbolData = new SymbolData[_reelData.TotalSlots];
 		}
 
 		public void GenerateReel()
@@ -59,7 +55,6 @@ namespace MysticalForestAdventure
 			for(int i = 0; i < _reelData.ReelCols; i++)
 			{
 				symbolDatas.AddRange(_reelData.SymbolData);
-
 				randomSymbolsSprites.Clear();
 
 				_randomGeneratedFullReel[i] ??= new List<SymbolData>();
@@ -84,6 +79,8 @@ namespace MysticalForestAdventure
 			float singleSpriteHeight = 1 / totalSymbols;
 
 			Sequence[] sequences = new Sequence[_reelRawImageList.Length];
+			_totalSpinSequences = sequences.Length;
+			_completedSpinSequences = 0;
 
 			for (int i = 0; i < _reelRawImageList.Length; i++)
 			{
@@ -96,7 +93,7 @@ namespace MysticalForestAdventure
 				int randomBottomIndex = UnityEngine.Random.Range(0, _reelData.TotalSymbols);
 				float randomEndValue = 5f + randomBottomIndex * singleSpriteHeight;
 				float randomDuration = UnityEngine.Random.Range(4f, 5f);
-				_currentReelBottomIndices[i] = randomBottomIndex;
+				_resultReelBottomIndices[i] = randomBottomIndex;
 
 				sequences[i] = DOTween.Sequence();
 
@@ -117,6 +114,29 @@ namespace MysticalForestAdventure
 							   rawImage.uvRect = new Rect(0f, value, imageRect.width, imageRect.height);
 						   })
 				);
+
+				sequences[i].OnComplete(OnSpinSequenceCompleted);
+			}
+		}
+
+		private void OnSpinSequenceCompleted()
+		{
+			_completedSpinSequences++;
+
+			if(_completedSpinSequences == _totalSpinSequences)
+			{
+				Debug.Log("All sequences completed");
+				GenerateResultReelSymbolData();
+			}
+		}
+
+		private void GenerateResultReelSymbolData()
+		{
+			for (int bottomValue = 0; bottomValue < _resultReelBottomIndices.Length; bottomValue++)
+            {
+				int bottomIndex = _resultReelBottomIndices[bottomValue];
+
+				_resultReelSymbolData[(_reelData.ReelRows - 1) * (_reelData.ReelCols) + bottomValue] = _randomGeneratedFullReel[bottomValue][bottomIndex];
 			}
 		}
 
@@ -136,12 +156,12 @@ namespace MysticalForestAdventure
             {
 				currentPayLine = _reelData.PayLines[payLineIndex];
 
-				firstMatchSymbol = GetReelSymbolData(currentPayLine.PositionIndices[0]).Symbol;
+				firstMatchSymbol = GetResultReelSymbolData(currentPayLine.PositionIndices[0]).Symbol;
 				currentLength = 1;
 
                 for (int positionIndex = 1; positionIndex < currentPayLine.PositionIndices.Length; positionIndex++)
                 {
-					currentMatchSymbol = GetReelSymbolData(currentPayLine.PositionIndices[positionIndex]).Symbol;
+					currentMatchSymbol = GetResultReelSymbolData(currentPayLine.PositionIndices[positionIndex]).Symbol;
 
 					if(currentMatchSymbol == firstMatchSymbol || currentMatchSymbol == Symbol.WILD)
 					{
