@@ -32,7 +32,7 @@ namespace MysticalForestAdventure
         public void StopSpinSfx()
         {
 			float volume = _audioSource.volume;
-			_audioSource.DOFade(0f, 0.3f).OnComplete(() =>
+			_audioSource.DOFade(0f, 0.2f).OnComplete(() =>
 			{
 				_audioSource.Stop();
 				_audioSource.clip = null;
