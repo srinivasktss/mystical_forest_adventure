@@ -16,6 +16,9 @@ namespace MysticalForestAdventure
 		[SerializeField] private RawImage[] _reelRawImageList;
 
 		private List<SymbolData>[] _randomGeneratedFullReel;
+		[SerializeField] private int[] _currentReelBottomIndices;
+		[SerializeField] private Ease _spinFirstAnimatinEase = Ease.Linear;
+		[SerializeField] private Ease _spinLastAnimatinEase = Ease.OutElastic;
 
 		private void Awake()
 		{
@@ -34,6 +37,7 @@ namespace MysticalForestAdventure
 		private void InitializeCurrentReel()
 		{
 			_randomGeneratedFullReel = new List<SymbolData>[_reelData.ReelCols];
+			_currentReelBottomIndices = new int[_reelData.ReelCols];
 			_currentReelSymbolData = new SymbolData[_reelData.TotalSlots];
 		}
 
@@ -43,22 +47,6 @@ namespace MysticalForestAdventure
 
 			return _reelData.SymbolData[randomSymbolIndex];
 		}
-
-		private void GenerateCurrentReel()
-		{
-            for (int i = 0; i < _currentReelSymbolData.Length; i++)
-            {
-				_currentReelSymbolData[i] = GetRandomSymbolData();
-			}
-        }
-
-		private void UpdateReelUI()
-		{
-            for (int i = 0; i < _currentReelSymbolData.Length; i++)
-            {
-				_symbolImages[i].sprite = GetReelSymbolData(i).SymbolSprite;
-            }
-        }
 
 		public void GenerateReel()
 		{
@@ -88,19 +76,12 @@ namespace MysticalForestAdventure
 
 				_reelRawImageList[i].texture = SpriteCombiner.CombineSpritesVerticallyForTexture(randomSymbolsSprites, _reelSpriteSpacing);
 			}
-
-			/*GenerateCurrentReel();
-			UpdateReelUI();*/
 		}
 
-		[SerializeField] private Ease _spinFirstAnimatinEase = Ease.Linear;
-		[SerializeField] private Ease _spinLastAnimatinEase = Ease.OutElastic;
 		public void SpinReel()
 		{
 			float totalSymbols = _reelData.TotalSymbols;
 			float singleSpriteHeight = 1 / totalSymbols;
-
-			Debug.Log($"totalSymbols: {totalSymbols}, singleSpriteHeight: {singleSpriteHeight}");
 
 			Sequence[] sequences = new Sequence[_reelRawImageList.Length];
 
@@ -112,8 +93,10 @@ namespace MysticalForestAdventure
 				rawImage.uvRect = new Rect(0f, 0f, imageRect.width, imageRect.height);
 
 				float value = 0f;
-				float randomEndValue = 5f + UnityEngine.Random.Range(0, _reelData.TotalSymbols) * singleSpriteHeight;
+				int randomBottomIndex = UnityEngine.Random.Range(0, _reelData.TotalSymbols);
+				float randomEndValue = 5f + randomBottomIndex * singleSpriteHeight;
 				float randomDuration = UnityEngine.Random.Range(4f, 5f);
+				_currentReelBottomIndices[i] = randomBottomIndex;
 
 				sequences[i] = DOTween.Sequence();
 
