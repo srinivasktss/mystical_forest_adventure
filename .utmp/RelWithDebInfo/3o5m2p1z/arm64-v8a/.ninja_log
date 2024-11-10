@@ -1,0 +1,12 @@
+# ninja log v5
+19	347	7529611883568883	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	dc86e071644f0c6a
+349	609	7529611885540362	D:/Srinivas/Unity_Projects/mystical_forest_adventure/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/3o5m2p1z/obj/arm64-v8a/libswappywrapper.so	d98107a56e552bc7
+12	1549	7529611895508356	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	5d7cbf8d4a1e3830
+10	1566	7529611895700218	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	1474d19151ba55e0
+6	1578	7529611895746367	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	dc2e6af2df540dfd
+16	1628	7529611896317627	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	dcdb4aaa0f631951
+14	1694	7529611896997592	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	96ad8b57ab6d9da0
+4	1765	7529611897709994	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	1052172905a29c12
+8	1978	7529611899837465	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	2265942a79ef8e48
+1	2095	7529611900933581	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	515e2b440b36163b
+2095	2177	7529611901752379	D:/Srinivas/Unity_Projects/mystical_forest_adventure/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/3o5m2p1z/obj/arm64-v8a/libgame.so	df02c1c16519e582

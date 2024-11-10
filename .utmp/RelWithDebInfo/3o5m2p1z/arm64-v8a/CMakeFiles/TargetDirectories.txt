@@ -1,0 +1,8 @@
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+D:/Srinivas/Unity_Projects/mystical_forest_adventure/.utmp/RelWithDebInfo/3o5m2p1z/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir
