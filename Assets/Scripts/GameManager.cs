@@ -88,6 +88,7 @@ namespace MysticalForestAdventure
 
 		private void OnSpinCompleted()
 		{
+			_reelController.CheckMatchingPayLines(ref _winResult);
 			CheckResult();
 		}
 
