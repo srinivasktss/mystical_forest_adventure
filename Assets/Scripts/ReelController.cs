@@ -102,30 +102,39 @@ namespace MysticalForestAdventure
 
 			Debug.Log($"totalSymbols: {totalSymbols}, singleSpriteHeight: {singleSpriteHeight}");
 
-			_reelRawImageList[0].uvRect = new Rect(0f, 0f, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
+			Sequence[] sequences = new Sequence[_reelRawImageList.Length];
 
-			float value = 0f;
-			float randomEndValue = 5f + UnityEngine.Random.Range(0, _reelData.TotalSymbols) * singleSpriteHeight;
+			for (int i = 0; i < _reelRawImageList.Length; i++)
+			{
+				RawImage rawImage = _reelRawImageList[i];
+				Rect imageRect = rawImage.uvRect;
 
-			Sequence sequence = DOTween.Sequence();
+				rawImage.uvRect = new Rect(0f, 0f, imageRect.width, imageRect.height);
 
-			sequence.Append(
-				DOTween.To(() => value, x => value = x, randomEndValue * 0.9f, 5f * 0.8f)
-					   .SetEase(_spinFirstAnimatinEase)
-					   .OnUpdate(() =>
-					   {
-						   _reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
-					   })
-			);
+				float value = 0f;
+				float randomEndValue = 5f + UnityEngine.Random.Range(0, _reelData.TotalSymbols) * singleSpriteHeight;
+				float randomDuration = UnityEngine.Random.Range(4f, 5f);
 
-			sequence.Append(
-				DOTween.To(() => value, x => value = x, randomEndValue, 5f * 0.2f)
-					   .SetEase(_spinLastAnimatinEase)
-					   .OnUpdate(() =>
-					   {
-						   _reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
-					   })
-			);
+				sequences[i] = DOTween.Sequence();
+
+				sequences[i].Append(
+					DOTween.To(() => value, x => value = x, randomEndValue * 0.9f, randomDuration * 0.8f)
+						   .SetEase(_spinFirstAnimatinEase)
+						   .OnUpdate(() =>
+						   {
+							   rawImage.uvRect = new Rect(0f, value, imageRect.width, imageRect.height);
+						   })
+				);
+
+				sequences[i].Append(
+					DOTween.To(() => value, x => value = x, randomEndValue, randomDuration * 0.2f)
+						   .SetEase(_spinLastAnimatinEase)
+						   .OnUpdate(() =>
+						   {
+							   rawImage.uvRect = new Rect(0f, value, imageRect.width, imageRect.height);
+						   })
+				);
+			}
 		}
 
 		public void CheckMatchingPayLines(ref WinResult winResult)
