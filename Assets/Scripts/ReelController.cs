@@ -93,8 +93,8 @@ namespace MysticalForestAdventure
 			UpdateReelUI();*/
 		}
 
-		public Ease FirstAnimatinEase = Ease.Linear;
-		public Ease LastAnimatinEase = Ease.OutBack;
+		[SerializeField] private Ease _spinFirstAnimatinEase = Ease.Linear;
+		[SerializeField] private Ease _spinLastAnimatinEase = Ease.OutElastic;
 		public void SpinReel()
 		{
 			float totalSymbols = _reelData.TotalSymbols;
@@ -106,27 +106,21 @@ namespace MysticalForestAdventure
 
 			float value = 0f;
 			float randomEndValue = 5f + UnityEngine.Random.Range(0, _reelData.TotalSymbols) * singleSpriteHeight;
-			/*DOTween.To(() => value, x => value = x, randomEndValue - singleSpriteHeight, 5f).SetEase(Ease.OutBack).OnUpdate(() =>
-			{
-				_reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
-			});*/
 
 			Sequence sequence = DOTween.Sequence();
 
-			// First tween: Fast linear animation to 90%
 			sequence.Append(
 				DOTween.To(() => value, x => value = x, randomEndValue * 0.9f, 5f * 0.8f)
-					   .SetEase(FirstAnimatinEase) // Or choose a faster ease if desired
+					   .SetEase(_spinFirstAnimatinEase)
 					   .OnUpdate(() =>
 					   {
 						   _reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
 					   })
 			);
 
-			// Second tween: Smooth easing from 90% to 100% with Ease.OutBack
 			sequence.Append(
 				DOTween.To(() => value, x => value = x, randomEndValue, 5f * 0.2f)
-					   .SetEase(LastAnimatinEase)
+					   .SetEase(_spinLastAnimatinEase)
 					   .OnUpdate(() =>
 					   {
 						   _reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);

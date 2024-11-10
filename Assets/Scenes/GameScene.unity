@@ -4408,8 +4408,8 @@ MonoBehaviour:
   - {fileID: 788704950}
   - {fileID: 372559649}
   - {fileID: 974504395}
-  FirstAnimatinEase: 1
-  LastAnimatinEase: 24
+  _spinFirstAnimatinEase: 2
+  _spinLastAnimatinEase: 24
 --- !u!4 &1656291272
 Transform:
   m_ObjectHideFlags: 0
