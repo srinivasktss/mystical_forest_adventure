@@ -4354,7 +4354,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reelData: {fileID: 11400000, guid: 30f2aa307ee47c648b1c1c86450bfa87, type: 2}
-  _currentReelSymbolData: []
+  _currentReelSymbolData:
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
+  - _symbol: 0
+    _symbolSprite: {fileID: 0}
   _symbolImages:
   - {fileID: 772417130}
   - {fileID: 1981340939}
@@ -4378,6 +4408,8 @@ MonoBehaviour:
   - {fileID: 788704950}
   - {fileID: 372559649}
   - {fileID: 974504395}
+  FirstAnimatinEase: 1
+  LastAnimatinEase: 24
 --- !u!4 &1656291272
 Transform:
   m_ObjectHideFlags: 0

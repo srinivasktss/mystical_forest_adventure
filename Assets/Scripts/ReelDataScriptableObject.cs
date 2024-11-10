@@ -27,9 +27,12 @@ namespace MysticalForestAdventure
 
 		private Dictionary<Symbol, Sprite> _symbolDataMap;
 
+		public int TotalSymbols { get; private set; }
+
 		private void OnEnable()
 		{
 			_totalSlots = _reelRows * _reelCols;
+			TotalSymbols = _symbolData.Length;
 			InitializeSymbolDataMap();
 			ValidatePayLines();
 		}

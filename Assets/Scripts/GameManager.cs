@@ -75,10 +75,13 @@ namespace MysticalForestAdventure
 			
 			OnAmountUpdated?.Invoke(_userProfileManager.GetAmount());
 
-			_reelController.GenerateReel();
-			_reelController.CheckMatchingPayLines(ref _winResult);
+			// _reelController.GenerateReel();
 
-			CheckResult();
+			_reelController.SpinReel();
+
+			/*_reelController.CheckMatchingPayLines(ref _winResult);
+
+			CheckResult();*/
 		}
 
 		public void CheckResult()

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace MysticalForestAdventure
 {
@@ -13,6 +14,8 @@ namespace MysticalForestAdventure
 
 		[SerializeField] private int _reelSpriteSpacing = 10;
 		[SerializeField] private RawImage[] _reelRawImageList;
+
+		private List<SymbolData>[] _randomGeneratedFullReel;
 
 		private void Awake()
 		{
@@ -30,6 +33,7 @@ namespace MysticalForestAdventure
 
 		private void InitializeCurrentReel()
 		{
+			_randomGeneratedFullReel = new List<SymbolData>[_reelData.ReelCols];
 			_currentReelSymbolData = new SymbolData[_reelData.TotalSlots];
 		}
 
@@ -58,23 +62,28 @@ namespace MysticalForestAdventure
 
 		public void GenerateReel()
 		{
-			List<Sprite> symbolSprites = new List<Sprite>();
+			List<SymbolData> symbolDatas = new List<SymbolData>();
+
 			List<Sprite> randomSymbolsSprites = new List<Sprite>();
+
 			int randomIndex;
 
 			for(int i = 0; i < _reelData.ReelCols; i++)
 			{
-				foreach(var symbolData in _reelData.SymbolData)
-					symbolSprites.Add(symbolData.SymbolSprite);
+				symbolDatas.AddRange(_reelData.SymbolData);
 
 				randomSymbolsSprites.Clear();
 
-				while (symbolSprites.Count > 0)
-				{
-					randomIndex = UnityEngine.Random.Range(0, symbolSprites.Count);
-					randomSymbolsSprites.Add(symbolSprites[randomIndex]);
+				_randomGeneratedFullReel[i] ??= new List<SymbolData>();
+				_randomGeneratedFullReel[i].Clear();
 
-					symbolSprites.RemoveAt(randomIndex);
+				while (symbolDatas.Count > 0)
+				{
+					randomIndex = UnityEngine.Random.Range(0, symbolDatas.Count);
+					randomSymbolsSprites.Add(symbolDatas[randomIndex].SymbolSprite);
+					_randomGeneratedFullReel[i].Add(symbolDatas[randomIndex]);
+
+					symbolDatas.RemoveAt(randomIndex);
 				}
 
 				_reelRawImageList[i].texture = SpriteCombiner.CombineSpritesVerticallyForTexture(randomSymbolsSprites, _reelSpriteSpacing);
@@ -84,9 +93,45 @@ namespace MysticalForestAdventure
 			UpdateReelUI();*/
 		}
 
+		public Ease FirstAnimatinEase = Ease.Linear;
+		public Ease LastAnimatinEase = Ease.OutBack;
 		public void SpinReel()
 		{
+			float totalSymbols = _reelData.TotalSymbols;
+			float singleSpriteHeight = 1 / totalSymbols;
 
+			Debug.Log($"totalSymbols: {totalSymbols}, singleSpriteHeight: {singleSpriteHeight}");
+
+			_reelRawImageList[0].uvRect = new Rect(0f, 0f, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
+
+			float value = 0f;
+			float randomEndValue = 5f + UnityEngine.Random.Range(0, _reelData.TotalSymbols) * singleSpriteHeight;
+			/*DOTween.To(() => value, x => value = x, randomEndValue - singleSpriteHeight, 5f).SetEase(Ease.OutBack).OnUpdate(() =>
+			{
+				_reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
+			});*/
+
+			Sequence sequence = DOTween.Sequence();
+
+			// First tween: Fast linear animation to 90%
+			sequence.Append(
+				DOTween.To(() => value, x => value = x, randomEndValue * 0.9f, 5f * 0.8f)
+					   .SetEase(FirstAnimatinEase) // Or choose a faster ease if desired
+					   .OnUpdate(() =>
+					   {
+						   _reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
+					   })
+			);
+
+			// Second tween: Smooth easing from 90% to 100% with Ease.OutBack
+			sequence.Append(
+				DOTween.To(() => value, x => value = x, randomEndValue, 5f * 0.2f)
+					   .SetEase(LastAnimatinEase)
+					   .OnUpdate(() =>
+					   {
+						   _reelRawImageList[0].uvRect = new Rect(0f, value, _reelRawImageList[0].uvRect.width, _reelRawImageList[0].uvRect.height);
+					   })
+			);
 		}
 
 		public void CheckMatchingPayLines(ref WinResult winResult)
