@@ -18,7 +18,7 @@ namespace MysticalForestAdventure
 		{
 			string name;
 			float amount;
-			bool newUserCreated = false;
+			bool saveData = false;
 			if (PlayerPrefs.HasKey(k_PlayerNameKey) && PlayerPrefs.HasKey(k_PlayerAmountKey))
 			{
 				name = PlayerPrefs.GetString(k_PlayerNameKey);
@@ -30,14 +30,22 @@ namespace MysticalForestAdventure
 				name = $"USER_{Random.Range(1000, 10000)}";
 				amount = 100;
 
-				newUserCreated = true;
+				saveData = true;
 			}
 
 			_userProfile ??= new UserProfile();
+
+			if(amount <= 0.1f)
+			{
+				amount = 10f;
+
+				saveData = true;
+			}
+
 			_userProfile.SetName(name);
 			_userProfile.SetAmount(amount);
 
-			if(newUserCreated)
+			if(saveData)
 			{
 				SaveUserProfile();
 			}

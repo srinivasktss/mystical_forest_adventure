@@ -9,6 +9,7 @@ namespace MysticalForestAdventure
 	public class ReelController : MonoBehaviour
     {
 		[SerializeField] private ReelDataScriptableObject _reelData;
+		[SerializeField] private ReelAudioController _reelAudioController;
 		[SerializeField] private SymbolData[] _resultReelSymbolData;
 		[SerializeField] private Image[] _symbolImages;
 
@@ -77,6 +78,8 @@ namespace MysticalForestAdventure
 
 		public void SpinReel()
 		{
+			_reelAudioController.PlaySpinStartSfx();
+
 			float totalSymbols = _reelData.TotalSymbols;
 			float singleSpriteHeight = 1 / totalSymbols;
 
@@ -124,6 +127,11 @@ namespace MysticalForestAdventure
 		private void OnSpinSequenceCompleted()
 		{
 			_completedSpinSequences++;
+
+			if(_totalSpinSequences - _completedSpinSequences == 2)
+			{
+				_reelAudioController.StopSpinSfx();
+			}
 
 			if(_completedSpinSequences == _totalSpinSequences)
 			{

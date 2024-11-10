@@ -13,6 +13,7 @@ namespace MysticalForestAdventure
 		[SerializeField] private UserProfileManager _userProfileManager;
 		[SerializeField] private ReelController _reelController;
 		[SerializeField] private ScoreManager _scoreManager;
+		[SerializeField] private GameAudioController _gameAudioController;
 
 		private WinResult _winResult;
 		public float CurrentBetAmount => _currentBetAmount;
@@ -35,6 +36,11 @@ namespace MysticalForestAdventure
 			_currentBetAmount = _betData.MinBetAmount;
 		}
 
+		private void Start()
+		{
+			_gameAudioController.PlayBGM();
+		}
+
 		private void OnDisable()
 		{
 			_reelController.OnReelSpinCompleted -= OnSpinCompleted;
@@ -48,12 +54,22 @@ namespace MysticalForestAdventure
 				return;
 			}
 
+			_gameAudioController.PlayGeneralButtonClickSfx();
+
 			_currentBetAmount += _betData.BetIncrement;
 			ClampBetAmount();
 		}
 
 		public void DecrementBet()
 		{
+			if (_userProfileManager.GetAmount() - _betData.BetIncrement <= 0f)
+			{
+				Debug.Log($"Cannot reduce");
+				return;
+			}
+
+			_gameAudioController.PlayGeneralButtonClickSfx();
+
 			_currentBetAmount -= _betData.BetIncrement;
 			ClampBetAmount();
 		}
@@ -75,6 +91,8 @@ namespace MysticalForestAdventure
 				Debug.Log("Insufficient amount");
 				return;
 			}
+
+			_gameAudioController.StopBGM();
 
 			_userProfileManager.UpdateAmount(-_currentBetAmount);
 			
