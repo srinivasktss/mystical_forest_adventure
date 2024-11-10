@@ -23,6 +23,8 @@ namespace MysticalForestAdventure
 		private int _totalSpinSequences;
 		private int _completedSpinSequences = 0;
 
+		public event Action OnReelSpinCompleted;
+
 		private void Awake()
 		{
 			InitializeReelRelatedData();
@@ -127,6 +129,7 @@ namespace MysticalForestAdventure
 			{
 				Debug.Log("All sequences completed");
 				GenerateResultReelSymbolData();
+				OnReelSpinCompleted?.Invoke();
 			}
 		}
 
@@ -136,7 +139,10 @@ namespace MysticalForestAdventure
             {
 				int bottomIndex = _resultReelBottomIndices[bottomValue];
 
-				_resultReelSymbolData[(_reelData.ReelRows - 1) * (_reelData.ReelCols) + bottomValue] = _randomGeneratedFullReel[bottomValue][bottomIndex];
+				for (int row = _reelData.ReelRows - 1, i = 0; row >= 0; row--, i++)
+				{
+					_resultReelSymbolData[row * _reelData.ReelCols + bottomValue] = _randomGeneratedFullReel[bottomValue][(bottomIndex + i) % _randomGeneratedFullReel[bottomValue].Count];
+				}
 			}
 		}
 

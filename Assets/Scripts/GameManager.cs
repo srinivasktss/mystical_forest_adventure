@@ -35,6 +35,11 @@ namespace MysticalForestAdventure
 			_currentBetAmount = _betData.MinBetAmount;
 		}
 
+		private void OnDisable()
+		{
+			_reelController.OnReelSpinCompleted -= OnSpinCompleted;
+		}
+
 		public void IncrmentBet()
 		{
 			if(_userProfileManager.GetAmount() < _currentBetAmount + _betData.BetIncrement)
@@ -75,7 +80,15 @@ namespace MysticalForestAdventure
 			
 			OnAmountUpdated?.Invoke(_userProfileManager.GetAmount());
 
+			_reelController.OnReelSpinCompleted -= OnSpinCompleted;
+			_reelController.OnReelSpinCompleted += OnSpinCompleted;
+
 			_reelController.SpinReel();
+		}
+
+		private void OnSpinCompleted()
+		{
+			CheckResult();
 		}
 
 		public void CheckResult()
