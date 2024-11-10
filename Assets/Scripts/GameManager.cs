@@ -62,7 +62,7 @@ namespace MysticalForestAdventure
 
 		public void DecrementBet()
 		{
-			if (_userProfileManager.GetAmount() - _betData.BetIncrement <= 0f)
+			if (_currentBetAmount - _betData.BetIncrement <= 0f)
 			{
 				Debug.Log($"Cannot reduce");
 				return;
