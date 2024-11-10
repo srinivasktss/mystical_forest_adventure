@@ -118,6 +118,8 @@ namespace MysticalForestAdventure
 				return;
 			}
 
+			_gameAudioController.PlayWinSfx(_winResult);
+
 			float multiplier = _scoreManager.GetMultiplier(_winResult.Symbol, (ConsequitiveCount)_winResult.MaxLength);
 
 			_userProfileManager.UpdateAmount(_currentBetAmount * multiplier);
