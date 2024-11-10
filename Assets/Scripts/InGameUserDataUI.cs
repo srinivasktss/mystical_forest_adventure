@@ -21,6 +21,7 @@ namespace MysticalForestAdventure
             {
                 GameManager.Instance.OnBetAmountUpdated += SetBetValueText;
 				GameManager.Instance.OnAmountUpdated += SetAmountValueText;
+				GameManager.Instance.OnWinAmountUpdated += SetWinValueText;
 			}
 		}
 
@@ -30,6 +31,7 @@ namespace MysticalForestAdventure
 			{
 				GameManager.Instance.OnBetAmountUpdated -= SetBetValueText;
 				GameManager.Instance.OnAmountUpdated -= SetAmountValueText;
+                GameManager.Instance.OnWinAmountUpdated -= SetWinValueText;
 			}
 		}
 

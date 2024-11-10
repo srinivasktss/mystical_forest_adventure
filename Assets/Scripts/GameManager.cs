@@ -18,7 +18,7 @@ namespace MysticalForestAdventure
 		private WinResult _winResult;
 		public float CurrentBetAmount => _currentBetAmount;
 
-		public event Action<float> OnBetAmountUpdated, OnAmountUpdated;
+		public event Action<float> OnBetAmountUpdated, OnAmountUpdated, OnWinAmountUpdated;
 
 		private void Awake()
 		{
@@ -95,7 +95,8 @@ namespace MysticalForestAdventure
 			_gameAudioController.StopBGM();
 
 			_userProfileManager.UpdateAmount(-_currentBetAmount);
-			
+			OnWinAmountUpdated?.Invoke(0f);
+
 			OnAmountUpdated?.Invoke(_userProfileManager.GetAmount());
 
 			_reelController.OnReelSpinCompleted -= OnSpinCompleted;
@@ -122,7 +123,11 @@ namespace MysticalForestAdventure
 
 			float multiplier = _scoreManager.GetMultiplier(_winResult.Symbol, (ConsequitiveCount)_winResult.MaxLength);
 
-			_userProfileManager.UpdateAmount(_currentBetAmount * multiplier);
+			float winAmount = _currentBetAmount * multiplier;
+
+			OnWinAmountUpdated?.Invoke(winAmount);
+
+			_userProfileManager.UpdateAmount(winAmount);
 		}
 	}
 }
